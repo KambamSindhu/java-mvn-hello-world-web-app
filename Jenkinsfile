@@ -33,17 +33,24 @@ stages {
                 }
             }
         }
-     stage('Stop and remove container') {
+  stage('Stop and Remove Container') {
             steps {
-               script {
-                  
-                        sh "docker stop hello-world-web-app"
-                        sh "docker rm  hello-world-web-app"
-                    
+                script {
+                    def containerName = 'hellodev'
+                    def runningContainer = sh(script: "docker ps -q -f name=${containerName}", returnStatus: true)
+
+                    if (runningContainer == 0) {
+                        echo "Container is not running."
+                    } else {
+                        echo "Stopping and removing the container..."
+                        sh "docker stop ${containerName}"
+                        sh "docker rm ${containerName}"
+                        echo "Container stopped and removed."
+                    }
                 }
             }
         }
-
+    
         
     }
 }
