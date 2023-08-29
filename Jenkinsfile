@@ -33,6 +33,16 @@ stages {
                 }
             }
         }
+     stage('Stop and remove container') {
+            steps {
+               script {
+                  
+                        sh "docker stop hello-world-web-app"
+                        sh "docker rm  hello-world-web-app"
+                    
+                }
+            }
+        }
 
         
     }
