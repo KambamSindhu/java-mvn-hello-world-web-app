@@ -50,6 +50,12 @@ stages {
                 }
             }
         }
+    stage('Run container') {
+            steps {
+                sh "docker run -d --name=hellodev -p 8081:8080 kambamsindhu/java-web-app-project"
+            }
+        }
+
     
         
     }
